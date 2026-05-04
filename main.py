@@ -11,7 +11,12 @@ label.pack()
 
 play_button = tk.PhotoImage(file="Image_Gallery/play_button.png")
 btn = tk.Button(root, image=play_button, cursor="hand2", command=lambda: print("Clicked!"))
-btn.place(relx=0.5, rely=0.7, anchor="center")
+btn.place(relx=0.5, rely=0.71, anchor="center")
+
+name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20))
+Username = name_entry.get()
+name_entry.place(relx=0.5, rely=0.5, anchor="center")
+
 
 def on_enter(event):
     btn.config(bg = "#000000")
