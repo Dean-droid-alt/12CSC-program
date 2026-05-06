@@ -10,12 +10,16 @@ label.image = photo
 label.pack()
 
 play_button = tk.PhotoImage(file="Image_Gallery/play_button.png")
-btn = tk.Button(root, image=play_button, cursor="hand2", command=lambda: print("Clicked!"))
-btn.place(relx=0.5, rely=0.71, anchor="center")
+btn = tk.Button(root, image=play_button, cursor="hand2", command=lambda: label.pack_forget(), text="Hide Text")
+btn.place(relx=0.5, rely=0.77, anchor="center")
 
 name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20))
 Username = name_entry.get()
-name_entry.place(relx=0.5, rely=0.5, anchor="center")
+label = tk.Label(root, text=f"Welcome to the quiz, {Username}!",fg="green")
+label.place(relx=0.5, rely=0.53, anchor="center")
+name_entry.bind('<Return>', lambda event:name_entry.delete(0, tk.END))
+name_entry.place(relx=0.5, rely=0.48, anchor="center")
+
 
 
 def on_enter(event):
