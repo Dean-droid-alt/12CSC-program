@@ -9,6 +9,20 @@ label = tk.Label(root, image=photo)
 label.image = photo
 label.pack()
 
+name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20))
+name_entry.bind('<Enter>')
+name_entry.place(relx=0.5, rely=0.48, anchor="center")
+
+def name_checker(self):
+    name= self.name_entry.get()
+    if name.isdigit():
+        self.outcome_label.config(text="Cannot have numbers in your name, try again", fg="red")
+    elif name.strip() == "":
+        self.outcome_label.config(text="Please enter a name, try again", fg="red")
+    elif any(char in "~!@#$%^&*()_+{}|:<>?*-=[]\\;',." for char in name):
+        self.outcome_label.config(text="Cannot have special characters, try again", fg="red")
+    else:
+        root.after(1750, open_new_window)
 
 def open_new_window():
     new_window = tk.Toplevel(root)
@@ -20,25 +34,19 @@ def open_new_window():
     image_label.pack(pady=40)
     root.withdraw()
 
+popup_frame = tk.Label(root, text=f"Welcome to the quiz,{name_entry}",fg="green")
+popup_frame.place(relx=0.5, rely=0.53, anchor="center")
+tk.Button(popup_frame, text="Start", command=hide_popup).pack(pady=10)
+
+
+
+def show_popup():
+    popup_frame.place(relx=0.5, rely=0.5, anchor="center")
+
 play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png")
-btn = tk.Button(root, image=play_button, cursor="hand2", command=lambda: label.pack_forget(), text="Hide Text")
+btn = tk.Button(root, image=play_button, cursor="hand2", command= show_popup)
 btn.place(relx=0.5, rely=0.77, anchor="center")
 
-name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20))
-name_label = tk.Label(root, text=f"Welcome to the quiz,{name_entry}",fg="green")
-name_label.place(relx=0.5, rely=0.53, anchor="center")
-name_entry.bind('<Enter>')
-name_entry.place(relx=0.5, rely=0.48, anchor="center")
-
-if name_entry.isdigit():
-    self.outcome_label= tk.Label(text="Cannot have numbers in your name, try again", fg="red")
-    self.outcome_label.pack()
-elif Username.strip() == "":
-    self.outcome_label.config(text="Please enter a name, try again", fg="red")
-elif any(char in "~!@#$%^&*()_+{}|:<>?*-=[]\\;',." for char in Username):
-    self.outcome_label.config(text="Cannot have special characters, try again", fg="red")
-else:
-    root.after(1750, open_new_window)
 
 def on_enter(enter):
     btn.config(bg = "#000000")
