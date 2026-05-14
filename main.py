@@ -3,24 +3,24 @@ from PIL import Image, ImageTk
 
 root = tk.Tk()
 
-image = Image.open("Image_Gallery/Homepage.png")
+image = Image.open("Image_Gallery/Homepage.png") #Opens image from image gallery folder
 photo = ImageTk.PhotoImage(image)
 label = tk.Label(root, image=photo)
 label.image = photo
 label.pack()
 
-name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20))
+name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20)) #Creates the name entry box with specific width, length and font
 name_entry.bind('<Enter>')
-name_entry.place(relx=0.5, rely=0.48, anchor="center")
+name_entry.place(relx=0.5, rely=0.48, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
 
 def name_checker(self):
-    name= self.name_entry.get()
-    if name.isdigit():
-        self.outcome_label.config(text="Cannot have numbers in your name, try again", fg="red")
-    elif name.strip() == "":
-        self.outcome_label.config(text="Please enter a name, try again", fg="red")
-    elif any(char in "~!@#$%^&*()_+{}|:<>?*-=[]\\;',." for char in name):
-        self.outcome_label.config(text="Cannot have special characters, try again", fg="red")
+    name= name_entry.get()
+    if name.isdigit(): #Checks whether users name has any numbers in it
+        self.outcome_label.config(text="Cannot have numbers in your name, try again", fg="red") #Does not let the user move on to the next page and gives a error message
+    elif name.strip() == "": #Checks whether user has entered anything into the box
+        self.outcome_label.config(text="Please enter a name, try again", fg="red") #Does not let the user move on to the next page and gives a error message
+    elif any(char in "~!@#$%^&*()_+{}|:<>?*-=[]\\;',." for char in name): #Checks whether users name has any symbols in it
+        self.outcome_label.config(text="Cannot have special characters, try again", fg="red") #Does not let the user move on to the next page and gives a error message
     else:
         root.after(1750, open_new_window)
 
@@ -31,20 +31,12 @@ def open_new_window():
     next_photo = ImageTk.PhotoImage(next_image)
     image_label = tk.Label(new_window, image=next_photo)
     image_label.image = next_photo
-    image_label.pack(pady=40)
+    image_label.pack()
     root.withdraw()
 
-popup_frame = tk.Label(root, text=f"Welcome to the quiz,{name_entry}",fg="green")
-popup_frame.place(relx=0.5, rely=0.53, anchor="center")
-tk.Button(popup_frame, text="Start", command=hide_popup).pack(pady=10)
-
-
-
-def show_popup():
-    popup_frame.place(relx=0.5, rely=0.5, anchor="center")
-
 play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png")
-btn = tk.Button(root, image=play_button, cursor="hand2", command= show_popup)
+new_window = lambda: [open_new_window(), name_checker]
+btn = tk.Button(root, image=play_button, cursor="hand2", command=new_window)
 btn.place(relx=0.5, rely=0.77, anchor="center")
 
 
