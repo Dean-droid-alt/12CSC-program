@@ -13,15 +13,19 @@ name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20)) #Creates the 
 name_entry.bind('<Enter>')
 name_entry.place(relx=0.5, rely=0.48, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
 
-def name_checker(self):
+outcome_label = tk.Label(root, text="Please enter your name", font=("Arial",9), bg="white")
+outcome_label.place(relx=0.5, rely=0.53, anchor="center")
+
+def name_checker():
     name= name_entry.get()
-    if name.isdigit(): #Checks whether users name has any numbers in it
-        self.outcome_label.config(text="Cannot have numbers in your name, try again", fg="red") #Does not let the user move on to the next page and gives a error message
+    if any(char.isdigit() for char in name): #Checks whether users name has any numbers in it
+        outcome_label.config(text="Cannot have numbers in your name, try again", fg="red") #Does not let the user move on to the next page and changes the text into the error message
     elif name.strip() == "": #Checks whether user has entered anything into the box
-        self.outcome_label.config(text="Please enter a name, try again", fg="red") #Does not let the user move on to the next page and gives a error message
+        outcome_label.config(text="Please enter a name, try again", fg="red") #Does not let the user move on to the next page and changes the text into the error message
     elif any(char in "~!@#$%^&*()_+{}|:<>?*-=[]\\;',." for char in name): #Checks whether users name has any symbols in it
-        self.outcome_label.config(text="Cannot have special characters, try again", fg="red") #Does not let the user move on to the next page and gives a error message
+        outcome_label.config(text="Cannot have special characters, try again", fg="red") #Does not let the user move on to the next page and changes the text into the error message
     else:
+        outcome_label.config(text= "Success!", fg="green")
         root.after(1750, open_new_window)
 
 def open_new_window():
@@ -36,7 +40,7 @@ def open_new_window():
 
 play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png")
 new_window = lambda: [open_new_window(), name_checker]
-btn = tk.Button(root, image=play_button, cursor="hand2", command=new_window)
+btn = tk.Button(root, image=play_button, cursor="hand2", command=name_checker)
 btn.place(relx=0.5, rely=0.77, anchor="center")
 
 
