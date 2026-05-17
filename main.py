@@ -2,6 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 root = tk.Tk()
+root.title("Home page")
 
 image = Image.open("Image_Gallery/Homepage.png") #Opens image from image gallery folder
 photo = ImageTk.PhotoImage(image)
@@ -39,7 +40,6 @@ def open_new_window():
     root.withdraw()
 
 play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png")
-new_window = lambda: [open_new_window(), name_checker]
 btn = tk.Button(root, image=play_button, cursor="hand2", command=name_checker)
 btn.place(relx=0.5, rely=0.77, anchor="center")
 
