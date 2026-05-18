@@ -10,6 +10,13 @@ label = tk.Label(root, image=photo)
 label.image = photo
 label.pack()
 
+Questions_answers = [
+    {"Questions": "What is the capital of Canada?", "Options": ["Montreal,Toronto,Vancouver,Ottawa"], "Answer": "Ottawa"},
+    {"Questions": "What country is this?", "Options": ["India,China,Japan,Indonesia"], "Answer": "India"},
+    {"Questions": "What is this famous landmark?", "Options": ["Statue of liberty,Stonehenge,Christ The Redeemer, Colosseum"], "Answer": "Christ the redeemer"},
+    {"Questions": "The ________ desert is the largest desert in the world", "Options": ["Antarctica","Arctic","Sahara","Arabian"],"Answer": "Antarctica"},
+    {"Questions": "What is the only continent on Earth that contains land in all four hemispheres?", "Options": ["North America","South America","Africa","Asia"],"Answer": "Africa"}]
+
 name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20)) #Creates the name entry box with specific width, length and font
 name_entry.bind('<Enter>')
 name_entry.place(relx=0.5, rely=0.48, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
