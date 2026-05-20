@@ -44,12 +44,33 @@ def open_new_window():
     image_label = tk.Label(new_window, image=next_photo)
     image_label.image = next_photo
     image_label.pack()
+
+    Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png")
+    btn = tk.Button(new_window, image=Answer1_button, cursor="hand2")
+    btn.image = Answer1_button
+    btn.place(relx=0.38, rely=0.75, anchor="center")
+
+    Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png")
+    btn = tk.Button(new_window, image=Answer2_button, cursor="hand2")
+    btn.image = Answer2_button
+    btn.place(relx=0.625, rely=0.75, anchor="center")
+
+    Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png")
+    btn = tk.Button(new_window, image=Answer3_button, cursor="hand2")
+    btn.image = Answer3_button
+    btn.place(relx=0.38, rely=0.92, anchor="center")
+
+    Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png")
+    btn = tk.Button(new_window, image=Answer4_button, cursor="hand2")
+    btn.image = Answer4_button
+    btn.place(relx=0.625, rely=0.92, anchor="center")
+
+
     root.withdraw()
 
 play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png")
 btn = tk.Button(root, image=play_button, cursor="hand2", command=name_checker)
 btn.place(relx=0.5, rely=0.77, anchor="center")
-
 
 def on_enter(enter):
     btn.config(bg = "#000000")
