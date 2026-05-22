@@ -32,6 +32,7 @@ def home_page():
 
     play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png")
     btn = tk.Button(root, image=play_button, cursor="hand2", command=name_checker)
+    btn.image = play_button
     btn.place(relx=0.5, rely=0.77, anchor="center")
 
     def on_enter(enter):
@@ -46,10 +47,10 @@ def home_page():
 home_page()
 
 Questions_answers = [
-    {"Questions": "What is the capital of Canada?", "Options": ["Montreal,Toronto,Vancouver,Ottawa"], "Answer": "Ottawa"},
-    {"Questions": "What country is this?", "Options": ["India,China,Japan,Indonesia"], "Answer": "India"},
-    {"Questions": "What is this famous landmark?", "Options": ["Statue of liberty,Stonehenge,Christ The Redeemer, Colosseum"], "Answer": "Christ the redeemer"},
-    {"Questions": "The ________ desert is the largest desert in the world", "Options": ["Antarctica","Arctic","Sahara","Arabian"],"Answer": "Antarctica"},
+    {"Questions": "What is the capital of Canada?", "Options": ["Montreal","Toronto","Vancouver","Ottawa"], "Answer": "Ottawa", "Background": "Image_Gallery/Q1.png"},
+    {"Questions": "What country is this?", "Options": ["India","China","Japan","Indonesia"], "Answer": "India"},
+    {"Questions": "What is this famous landmark?", "Options": ["Statue of liberty","Stonehenge","Christ The Redeemer", "Colosseum"], "Answer": "Christ the redeemer"},
+    {"Questions": "The ________ desert is the largest desert in the world", "Options": ["Antarctic","Arctic","Sahara","Arabian"],"Answer": "Antarctic"},
     {"Questions": "What is the only continent on Earth that contains land in all four hemispheres?", "Options": ["North America","South America","Africa","Asia"],"Answer": "Africa"}]
 
 def open_new_window():
@@ -82,9 +83,14 @@ def open_new_window():
     btn.place(relx=0.625, rely=0.92, anchor="center")
 
     Exit_button = tk.PhotoImage(file="Image_Gallery/Exit_button.png")
-    btn = tk.Button(new_window, image=Exit_button, cursor="hand2")
+    btn = tk.Button(new_window, image=Exit_button, cursor="hand2", command=home_page)
     btn.image = Exit_button
     btn.place(relx=0.05, rely=0.09, anchor="center")
+
+    Next_button = tk.PhotoImage(file="Image_Gallery/Next_button.png")
+    btn = tk.Button(new_window, image=Next_button, cursor="hand2")
+    btn.image = Next_button
+    btn.place(relx=0.80, rely=0.845, anchor="center")
 
     root.withdraw()
 
