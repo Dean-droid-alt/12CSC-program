@@ -48,10 +48,16 @@ home_page()
 
 Questions_answers = [
     {"Questions": "What is the capital of Canada?", "Options": ["Montreal","Toronto","Vancouver","Ottawa"], "Answer": "Ottawa", "Background": "Image_Gallery/Q1.png"},
-    {"Questions": "What country is this?", "Options": ["India","China","Japan","Indonesia"], "Answer": "India"},
-    {"Questions": "What is this famous landmark?", "Options": ["Statue of liberty","Stonehenge","Christ The Redeemer", "Colosseum"], "Answer": "Christ the redeemer"},
-    {"Questions": "The ________ desert is the largest desert in the world", "Options": ["Antarctic","Arctic","Sahara","Arabian"],"Answer": "Antarctic"},
-    {"Questions": "What is the only continent on Earth that contains land in all four hemispheres?", "Options": ["North America","South America","Africa","Asia"],"Answer": "Africa"}]
+    {"Questions": "What country is this?", "Options": ["India","China","Japan","Indonesia"], "Answer": "India", "Background": "Image_Gallery/Q2.png"},
+    {"Questions": "What is this famous landmark?", "Options": ["Statue of liberty","Stonehenge","Christ The Redeemer", "Colosseum"], "Answer": "Christ the redeemer", "Background": "Image_Gallery/Q3.png"},
+    {"Questions": "The ________ desert is the largest desert in the world", "Options": ["Antarctic","Arctic","Sahara","Arabian"],"Answer": "Antarctic", "Background": "Image_Gallery/Q4.png"},
+    {"Questions": "What is the only continent on Earth that contains land in all four hemispheres?", "Options": ["North America","South America","Africa","Asia"],"Answer": "Africa", "Background": "Image_Gallery/Q5.png"},
+    {"Questions": "What is the capital of Japan?", "Options": ["Osaka", "Tokyo", "Sapporo", "Nagasaki"], "Answer": "Tokyo", "Background": "Image_Gallery/Q6.png"},
+    {"Questions": "What country is this?", "Options": ["Sweden", "Norway", "Denmark", "England"], "Answer": "Sweden", "Background": "Image_Gallery/Q7.png"},
+    {"Questions": "What is this famous landmark?", "Options": ["Neuschwanstein Castle", "Mont-Saint-Michel", "Potala Palace", "Petra"], "Answer": "Mont-Saint-Michel", "Background": "Image_Gallery/Q8.png"},
+    {"Questions": "_______ is the country with the highest population", "Options": ["USA","Russia","China","India"], "Answer": "India", "Background": "Image_Gallery/Q9.png"},
+    {"Questions": "Which is the largest ocean on Earth?", "Options": ["Atlantic","Indian","Pacific","Arctic"], "Answer": "Pacific", "Background": "Image_Gallery/Q10.png"},
+]
 
 def open_new_window():
     new_window = tk.Toplevel(root)
@@ -82,8 +88,12 @@ def open_new_window():
     btn.image = Answer4_button
     btn.place(relx=0.625, rely=0.92, anchor="center")
 
+    def exit_to_home():
+        new_window.destroy()
+        root.deiconify()
+
     Exit_button = tk.PhotoImage(file="Image_Gallery/Exit_button.png")
-    btn = tk.Button(new_window, image=Exit_button, cursor="hand2", command=home_page)
+    btn = tk.Button(new_window, image=Exit_button, cursor="hand2", command=exit_to_home)
     btn.image = Exit_button
     btn.place(relx=0.05, rely=0.09, anchor="center")
 
