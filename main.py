@@ -1,24 +1,24 @@
 import tkinter as tk #Tells python to load the tkinter module
 from PIL import Image, ImageTk #Makes it so that I can use Image and ImageTK modules from the pillow library, this allows images to be processed
 
-root = tk.Tk()
+root = tk.Tk() #Creates the tkinter window
 root.title("Home page") #Gives the title of my first window
 
-def home_page():
+def home_page(): #Creates a def function for all elements in the home page
     image = Image.open("Image_Gallery/Homepage.png") #Opens image from image gallery folder
-    photo = ImageTk.PhotoImage(image)
-    label = tk.Label(root, image=photo)
-    label.image = photo
-    label.pack()
+    photo = ImageTk.PhotoImage(image) #Converts an image to a tkinter compatible formate
+    label = tk.Label(root, image=photo) #Creates a widget that displays an image instead of text
+    label.image = photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
+    label.pack()  #Makes the image for the homepage appear
 
     name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20)) #Creates the name entry box with specific width, length and font
-    name_entry.bind('<Enter>')
+    name_entry.bind('<Return>')
     name_entry.place(relx=0.5, rely=0.48, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
 
     outcome_label = tk.Label(root, text="Please enter your name", font=("Arial",9), bg="white") #Creates a label with a specific message, font, font size and background
     outcome_label.place(relx=0.5, rely=0.53, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
 
-    def name_checker():
+    def name_checker(): #Creates a def function for
         name = name_entry.get() #Retrieves the text the user has entered
         if any(char.isdigit() for char in name): #Checks whether users name has any numbers in it
             outcome_label.config(text="Cannot have numbers in your name, try again", fg="red") #Does not let the user move on to the next page and changes the text in outcome_label into the error message in red
@@ -68,25 +68,31 @@ def open_new_window():
     image_label.image = next_photo
     image_label.pack()
 
+    def check_answer(selected_answer):
+        if selected_answer == ["Answer"]:
+            print("Correct")
+        else:
+            print("Wrong")
+
     Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png")
-    btn = tk.Button(new_window, image=Answer1_button, cursor="hand2")
-    btn.image = Answer1_button
-    btn.place(relx=0.38, rely=0.75, anchor="center")
+    btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text=(["Options"][1]), command=lambda: check_answer(["Options"][1]))
+    btn1.image = Answer1_button
+    btn1.place(relx=0.38, rely=0.75, anchor="center")
 
     Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png")
-    btn = tk.Button(new_window, image=Answer2_button, cursor="hand2")
-    btn.image = Answer2_button
-    btn.place(relx=0.625, rely=0.75, anchor="center")
+    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2")
+    btn2.image = Answer2_button
+    btn2.place(relx=0.625, rely=0.75, anchor="center")
 
     Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png")
-    btn = tk.Button(new_window, image=Answer3_button, cursor="hand2")
-    btn.image = Answer3_button
-    btn.place(relx=0.38, rely=0.92, anchor="center")
+    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2")
+    btn3.image = Answer3_button
+    btn3.place(relx=0.38, rely=0.92, anchor="center")
 
     Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png")
-    btn = tk.Button(new_window, image=Answer4_button, cursor="hand2")
-    btn.image = Answer4_button
-    btn.place(relx=0.625, rely=0.92, anchor="center")
+    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2")
+    btn4.image = Answer4_button
+    btn4.place(relx=0.625, rely=0.92, anchor="center")
 
     def exit_to_home():
         new_window.destroy()
