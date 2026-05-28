@@ -6,7 +6,7 @@ root.title("Home page") #Gives the title of my first window
 
 def home_page(): #Creates a def function for all elements in the home page
     image = Image.open("Image_Gallery/Homepage.png") #Opens image from image gallery folder
-    photo = ImageTk.PhotoImage(image) #Converts an image to a tkinter compatible formate
+    photo = ImageTk.PhotoImage(image) #Converts an image to a tkinter compatible format
     label = tk.Label(root, image=photo) #Creates a widget that displays an image instead of text
     label.image = photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
     label.pack()  #Makes the image for the homepage appear
@@ -30,18 +30,18 @@ def home_page(): #Creates a def function for all elements in the home page
             outcome_label.config(text= "Success!", fg="green") #Changes the text in outcome_label into the success message in green
             root.after(1750, open_new_window) #Lets the user move on to the next page using the open_new_window command and makes it happen after a short period of time
 
-    play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png")
-    btn = tk.Button(root, image=play_button, cursor="hand2", command=name_checker)
-    btn.image = play_button
-    btn.place(relx=0.5, rely=0.77, anchor="center")
+    play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png") #Coverts the image of the play button into a tkinter compatible format
+    btn = tk.Button(root, image=play_button,  cursor="hand2", command=name_checker) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
+    btn.image = play_button #Makes the play button have the attributes of the button
+    btn.place(relx=0.5, rely=0.77, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
-    def on_enter(enter):
-        btn.config(bg = "#000000")
+    def on_enter(enter): #Creates a variable for what happens when the mouse is on the button
+        btn.config(bg = "#000000") #Makes the background of the button black
 
-    def on_leave(leave):
-        btn.config(bg = "#d8d3c9")
+    def on_leave(leave): #Creates a variable for what happens when the mouse is off the button
+        btn.config(bg = "#d8d3c9") #Makes the background of the button grayish orange
 
-    btn.bind("<Enter>", on_enter)
+    btn.bind("<Enter>", on_enter) #Connects the mouse hovering over the button to the change in background of the button
     btn.bind("<Leave>", on_leave)
 
 home_page()
