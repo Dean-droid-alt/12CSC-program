@@ -77,7 +77,7 @@ def open_new_window(): #Creates a def function for the questions page
             print("Wrong")
 
     Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png")
-    btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0], compound="center", command=lambda: check_answer(current_question["Options"][0]))
+    btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][0]))
     btn1.image = Answer1_button
     btn1.place(relx=0.38, rely=0.75, anchor="center")
 
