@@ -59,6 +59,8 @@ Questions_answers = [ #Questions and answers for my quiz
     {"Questions": "What is the largest ocean on Earth?", "Options": ["Atlantic","Indian","Pacific","Arctic"], "Answer": "Pacific", "Background": "Image_Gallery/Q10.png"},
 ]
 
+question_index = 0
+
 def open_new_window(): #Creates a def function for the questions page
     new_window = tk.Toplevel(root) #Creates a secondary window
     new_window.title("Questions page") #Creates the title of the second window
@@ -68,7 +70,22 @@ def open_new_window(): #Creates a def function for the questions page
     image_label.image = next_photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
     image_label.pack() #Makes the image for the homepage appear
 
-    current_question = Questions_answers[0]
+    current_question = Questions_answers[question_index]
+
+    def next_question():
+        global question_index
+        question_index +=1
+
+        if question_index < len(Questions_answers):
+            current_question = Questions_answers[question_index]
+
+            btn1.config(text= current_question["Options"][0])
+            btn2.config(text=current_question["Options"][1])
+            btn3.config(text=current_question["Options"][2])
+            btn4.config(text=current_question["Options"][3])
+
+            image = Image.open(current_question["Background"])
+            photo = ImageTk.PhotoImage(image)
 
     def check_answer(selected_answer):
         if selected_answer == current_question["Answer"]:
@@ -82,17 +99,17 @@ def open_new_window(): #Creates a def function for the questions page
     btn1.place(relx=0.38, rely=0.75, anchor="center")
 
     Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png")
-    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1], compound="center", command=lambda: check_answer(current_question["Options"][1]))
+    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][1]))
     btn2.image = Answer2_button
     btn2.place(relx=0.625, rely=0.75, anchor="center")
 
     Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png")
-    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2], compound="center", command=lambda: check_answer(current_question["Options"][2]))
+    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][2]))
     btn3.image = Answer3_button
     btn3.place(relx=0.38, rely=0.92, anchor="center")
 
     Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png")
-    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3], compound="center", command=lambda: check_answer(current_question["Options"][3]))
+    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][3]))
     btn4.image = Answer4_button
     btn4.place(relx=0.625, rely=0.92, anchor="center")
 
