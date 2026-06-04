@@ -64,7 +64,7 @@ question_index = 0
 def open_new_window(): #Creates a def function for the questions page
     new_window = tk.Toplevel(root) #Creates a secondary window
     new_window.title("Questions page") #Creates the title of the second window
-    next_image = Image.open("Image_Gallery/Question_page.png") #Opens the image from image gallery folder
+    next_image = Image.open("Image_Gallery/Q1.png") #Opens the image from image gallery folder
     next_photo = ImageTk.PhotoImage(next_image) #Converts an image to a tkinter compatible format
     image_label = tk.Label(new_window, image=next_photo) #Creates a widget that displays an image instead of text
     image_label.image = next_photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
@@ -87,11 +87,15 @@ def open_new_window(): #Creates a def function for the questions page
             image = Image.open(current_question["Background"])
             photo = ImageTk.PhotoImage(image)
 
+            image_label.config(image=photo)
+            image_label.image = photo
+
     def check_answer(selected_answer):
         if selected_answer == current_question["Answer"]:
             print("Correct")
         else:
             print("Wrong")
+
 
     Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png")
     btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][0]))
@@ -123,7 +127,7 @@ def open_new_window(): #Creates a def function for the questions page
     btn.place(relx=0.05, rely=0.09, anchor="center")
 
     Next_button = tk.PhotoImage(file="Image_Gallery/Next_button.png")
-    btn = tk.Button(new_window, image=Next_button, cursor="hand2", bg = "#aea498", activebackground="#aea498", highlightthickness=0)
+    btn = tk.Button(new_window, image=Next_button, cursor="hand2", command=next_question)
     btn.image = Next_button
     btn.place(relx=0.80, rely=0.845, anchor="center")
 
