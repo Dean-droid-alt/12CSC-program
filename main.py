@@ -131,6 +131,11 @@ def open_new_window(): #Creates a def function for the questions page
     btn.image = Next_button
     btn.place(relx=0.80, rely=0.845, anchor="center")
 
+    Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
+    btn = tk.Button(new_window, image=Help_button, cursor="hand2")
+    btn.image = Help_button
+    btn.place(relx=0.955, rely=0.09, anchor="center")
+
     new_window.protocol("WM_DELETE_WINDOW", exit_to_home)
 
     root.withdraw()
