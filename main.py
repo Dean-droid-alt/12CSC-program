@@ -77,7 +77,6 @@ def open_new_window(): #Creates a def function for the questions page
         question_index +=1
 
         if question_index < len(Questions_answers):
-            current_question = Questions_answers[question_index]
 
             btn1.config(text= current_question["Options"][0])
             btn2.config(text=current_question["Options"][1])
@@ -91,6 +90,7 @@ def open_new_window(): #Creates a def function for the questions page
             image_label.image = photo
 
     def check_answer(selected_answer):
+        current_question = Questions_answers[question_index]
         if selected_answer == current_question["Answer"]:
             print("Correct")
         else:
@@ -135,8 +135,6 @@ def open_new_window(): #Creates a def function for the questions page
     btn = tk.Button(new_window, image=Help_button, cursor="hand2")
     btn.image = Help_button
     btn.place(relx=0.955, rely=0.09, anchor="center")
-
-    new_window.protocol("WM_DELETE_WINDOW", exit_to_home)
 
     root.withdraw()
 
