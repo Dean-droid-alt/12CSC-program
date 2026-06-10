@@ -76,8 +76,9 @@ def open_new_window(): #Creates a def function for the questions page
         global question_index
         question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
 
-        if question_index < len(Questions_answers): #If the question_index number is within the number of questions that are in the dictionary
+        current_question = Questions_answers[question_index]
 
+        if question_index < len(Questions_answers): #If the question_index number is within the number of questions that are in the dictionary
             btn1.config(text= current_question["Options"][0]) #Makes button 1 show the multichoice answer for the current question the user is on
             btn2.config(text=current_question["Options"][1]) #Makes button 2 show the multichoice answer for the current question the user is on
             btn3.config(text=current_question["Options"][2]) #Makes button 3 show the multichoice answer for the current question the user is on
@@ -94,8 +95,6 @@ def open_new_window(): #Creates a def function for the questions page
             print("Correct")
         else: #If the answer the user has selected is not the same as the answer for the current question from the dictionary
             print("Wrong")
-
-        next_question()
 
     Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png")
     btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][0]))
