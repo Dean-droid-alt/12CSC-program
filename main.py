@@ -87,10 +87,11 @@ def open_new_window(): #Creates a def function for the questions page
             image = Image.open(current_question["Background"]) #Opens image from the background part of the dictionary for the current question the user is on
             photo = ImageTk.PhotoImage(image) #Converts an image to a tkinter compatible format
 
-            image_label.config(image=photo) #
-            image_label.image = photo
+            image_label.config(image=photo) #Makes sure python doesn't clear the image from memory
+            image_label.image = photo #Makes sure python doesn't clear the image from memory
 
     def check_answer(selected_answer): #Creates a def function for the answer that the user selects to be checked whether it is right or wrong
+        current_question = Questions_answers[question_index]
         if selected_answer == current_question["Answer"]: #If the answer the user has selected is the same as the answer for the current question from the dictionary
             print("Correct")
         else: #If the answer the user has selected is not the same as the answer for the current question from the dictionary
@@ -102,17 +103,17 @@ def open_new_window(): #Creates a def function for the questions page
     btn1.place(relx=0.38, rely=0.75, anchor="center")
 
     Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png")
-    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][1]))
+    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(btn2["text"]))
     btn2.image = Answer2_button
     btn2.place(relx=0.625, rely=0.75, anchor="center")
 
     Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png")
-    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][2]))
+    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(btn3["text"]))
     btn3.image = Answer3_button
     btn3.place(relx=0.38, rely=0.92, anchor="center")
 
     Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png")
-    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(current_question["Options"][3]))
+    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3], compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(btn4["text"]))
     btn4.image = Answer4_button
     btn4.place(relx=0.625, rely=0.92, anchor="center")
 
