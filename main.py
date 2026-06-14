@@ -28,6 +28,7 @@ def home_page(): #Creates a def function for all elements in the home page
             outcome_label.config(text="Cannot have special characters, try again", fg="red") #Does not let the user move on to the next page and changes the text in outcome_label into the error message in red
         else: #If there is no problem with the users name
             outcome_label.config(text= "Success!", fg="green") #Changes the text in outcome_label into the success message in green
+            btn.config(command=lambda: None) #Disables the play button after it has been pressed
             root.after(1750, open_new_window) #Lets the user move on to the next page using the open_new_window command and makes it happen after a short period of time
 
     play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png") #Coverts the image of the play button into a tkinter compatible format
@@ -97,29 +98,61 @@ def open_new_window(): #Creates a def function for the questions page
         else: #If the answer the user has selected is not the same as the answer for the current question from the dictionary
             print("Wrong")
 
+    selected_button = None
+    selected_answer = None
+
+    def select_answer(button):
+        nonlocal selected_button, selected_answer
+
+        if selected_button:
+            selected_button.config(bg = "#000000")
+
+
+
+
+
+
     Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png")
     btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0]
-    , compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(btn1["text"]))
+    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn1["text"]))
     btn1.image = Answer1_button
     btn1.place(relx=0.38, rely=0.75, anchor="center")
 
     Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png")
     btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1]
-    , compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(btn2["text"]))
+    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn2["text"]))
     btn2.image = Answer2_button
     btn2.place(relx=0.625, rely=0.75, anchor="center")
 
     Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png")
     btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2]
-    , compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(btn3["text"]))
+    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn3["text"]))
     btn3.image = Answer3_button
     btn3.place(relx=0.38, rely=0.92, anchor="center")
 
     Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png")
     btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3]
-    , compound="center", font=("Arial", 14, "bold"), fg="white", command=lambda: check_answer(btn4["text"]))
+    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn4["text"]))
     btn4.image = Answer4_button
     btn4.place(relx=0.625, rely=0.92, anchor="center")
+
+    def hover_on(event):
+        event.widget.config(bg = "#A9A9A9")
+
+    def hover_off(event):
+        event.widget.config(relief="flat")
+
+    btn1.bind("<Enter>", hover_on)
+    btn1.bind("<Leave>", hover_off)
+
+    btn2.bind("<Enter>", hover_on)
+    btn2.bind("<Leave>", hover_off)
+
+    btn3.bind("<Enter>", hover_on)
+    btn3.bind("<Leave>", hover_off)
+
+    btn4.bind("<Enter>", hover_on)
+    btn4.bind("<Leave>", hover_off)
 
     def exit_to_home():
         new_window.destroy()
