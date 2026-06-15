@@ -29,7 +29,7 @@ def home_page(): #Creates a def function for all elements in the home page
         else: #If there is no problem with the users name
             outcome_label.config(text= "Success!", fg="green") #Changes the text in outcome_label into the success message in green
             btn.config(command=lambda: None) #Disables the play button after it has been pressed
-            root.after(1750, open_new_window) #Lets the user move on to the next page using the open_new_window command and makes it happen after a short period of time
+            root.after(1750, open_questions_page) #Lets the user move on to the next page using the open_questions_page command and makes it happen after a short period of time
 
     play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png") #Coverts the image of the play button into a tkinter compatible format
     btn = tk.Button(root, image=play_button,  cursor="hand2", command=name_checker) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
@@ -62,22 +62,22 @@ Questions_answers = [ #Questions and answers for my quiz
 
 question_index = 0
 
-def open_new_window(): #Creates a def function for the questions page
+def open_questions_page(): #Creates a def function for the questions page
     new_window = tk.Toplevel(root) #Creates a secondary window
     new_window.title("Questions page") #Creates the title of the second window
     next_image = Image.open("Image_Gallery/Q1.png") #Opens the image from image gallery folder
     next_photo = ImageTk.PhotoImage(next_image) #Converts an image to a tkinter compatible format
     image_label = tk.Label(new_window, image=next_photo) #Creates a widget that displays an image instead of text
     image_label.image = next_photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
-    image_label.pack() #Makes the image for the homepage appear
+    image_label.pack() #Makes the image for the questions page appear
 
-    current_question = Questions_answers[question_index]
+    current_question = Questions_answers[question_index] #A variable current_question is created which contains the line of the dictionary that corresponds to the number from question_index
 
     def next_question(): #Creates a def function for the user to move on to the next question
         global question_index
         question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
 
-        current_question = Questions_answers[question_index]
+        current_question = Questions_answers[question_index] #Current_question is updated as the question_index increased by 1
 
         if question_index < len(Questions_answers): #If the question_index number is within the number of questions that are in the dictionary
             btn1.config(text= current_question["Options"][0]) #Makes button 1 show the multichoice answer for the current question the user is on
@@ -107,32 +107,36 @@ def open_new_window(): #Creates a def function for the questions page
         if selected_button:
             selected_button.config(bg = "#000000")
 
+        selected_button = button
+        selected_button.config(relief="sunken")
+        selected_answer = button["text"]
 
+        selected_button = lambda: select_answer(btn1)
+        selected_button = lambda: select_answer(btn2)
+        selected_button = lambda: select_answer(btn3)
+        selected_button = lambda: select_answer(btn4)
 
-
-
-
-    Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png")
-    btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0]
-    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn1["text"]))
+    Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png") #Converts the Answer1_button image into tkinter compatible format
+    btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0]  #Creates a button with the Answer1_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn1["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn1.image = Answer1_button
     btn1.place(relx=0.38, rely=0.75, anchor="center")
 
-    Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png")
-    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1]
-    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn2["text"]))
+    Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png") #Converts the Answer1_button image into tkinter compatible format
+    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn2["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn2.image = Answer2_button
     btn2.place(relx=0.625, rely=0.75, anchor="center")
 
-    Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png")
-    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2]
-    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn3["text"]))
+    Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png") #Converts the Answer1_button image into tkinter compatible format
+    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2] #Creates a button with the Answer3_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn3["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn3.image = Answer3_button
     btn3.place(relx=0.38, rely=0.92, anchor="center")
 
-    Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png")
-    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3]
-    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn4["text"]))
+    Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png") #Converts the Answer1_button image into tkinter compatible format
+    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn4["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn4.image = Answer4_button
     btn4.place(relx=0.625, rely=0.92, anchor="center")
 
@@ -168,8 +172,14 @@ def open_new_window(): #Creates a def function for the questions page
     btn.image = Next_button
     btn.place(relx=0.80, rely=0.845, anchor="center")
 
+    def open_help_page():  # Creates a def function for the help page
+        help_page = tk.Toplevel(root)  # Creates a secondary window
+        help_page.title("Help page")  # Creates the title of the second window
+        help_page.geometry("200x150")
+        image_label.pack()  # Makes the image for the help page appear
+
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
-    btn = tk.Button(new_window, image=Help_button, cursor="hand2")
+    btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= open_help_page)
     btn.image = Help_button
     btn.place(relx=0.955, rely=0.09, anchor="center") #
 
