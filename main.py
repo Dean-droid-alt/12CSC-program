@@ -1,5 +1,6 @@
 import tkinter as tk #Tells python to load the tkinter module
 from PIL import Image, ImageTk #Makes it so that I can use Image and ImageTK modules from the pillow library, this allows images to be processed
+from tkinter import messagebox
 
 root = tk.Tk() #Creates the tkinter window
 root.title("Home page") #Gives the title of my first window
@@ -75,6 +76,11 @@ def open_questions_page(): #Creates a def function for the questions page
 
     def next_question(): #Creates a def function for the user to move on to the next question
         global question_index
+        nonlocal selected_answer, selected_button
+
+        if selected_answer is None:
+            messagebox.showinfo("Error", "Please select an answer!")
+
         question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
 
         current_question = Questions_answers[question_index] #Current_question is updated as the question_index increased by 1
@@ -108,7 +114,7 @@ def open_questions_page(): #Creates a def function for the questions page
             selected_button.config(bg = "#000000")
 
         selected_button = button
-        selected_button.config(relief="sunken")
+        selected_button.config(bg = "#000000")
         selected_answer = button["text"]
 
         selected_button = lambda: select_answer(btn1)
@@ -172,16 +178,21 @@ def open_questions_page(): #Creates a def function for the questions page
     btn.image = Next_button
     btn.place(relx=0.80, rely=0.845, anchor="center")
 
-    def open_help_page():  # Creates a def function for the help page
-        help_page = tk.Toplevel(root)  # Creates a secondary window
-        help_page.title("Help page")  # Creates the title of the second window
-        help_page.geometry("200x150")
-        image_label.pack()  # Makes the image for the help page appear
+    def help_popup():
+        messagebox.showinfo(
+    "Quiz help",
+"Welcome to the Geography Quiz!\n\n" 
+        "- Select the one answer you believe to be correct for each question\n\n" 
+        "- Press the next button to submit your answer and move on to the next page\n\n"
+        "- You cannot change your answer after it has been submited\n\n"
+        "- There are 10 questions in total\n\n"
+        "- You need to get at least 7 out of 10 questions correct to pass the quiz\n")
 
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
-    btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= open_help_page)
+    btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
     btn.image = Help_button
     btn.place(relx=0.955, rely=0.09, anchor="center") #
+
 
     root.withdraw()
 
