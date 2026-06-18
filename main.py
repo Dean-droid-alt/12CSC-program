@@ -12,6 +12,7 @@ def home_page(): #Creates a def function for all elements in the home page
     label.image = photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
     label.pack()  #Makes the image for the homepage appear
 
+    global name_entry, outcome_label
     name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20)) #Creates the name entry box with specific width, length and font
     name_entry.bind('<Return>', lambda event: name_checker()) #Makes it so that you can enter your name with the enter button
     name_entry.place(relx=0.5, rely=0.48, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
@@ -97,12 +98,41 @@ def open_questions_page(): #Creates a def function for the questions page
             image_label.config(image=photo) #Makes sure python doesn't clear the image from memory
             image_label.image = photo #Makes sure python doesn't clear the image from memory
 
+            btn1.config(bg="white")
+            btn2.config(bg="white")
+            btn3.config(bg="white")
+            btn4.config(bg="white")
+
     def check_answer(selected_answer): #Creates a def function for the answer that the user selects to be checked whether it is right or wrong the selected_answer variable is created and holds the choice the user made
         current_question = Questions_answers[question_index]
         if selected_answer == current_question["Answer"]: #If the answer the user has selected is the same as the answer for the current question from the dictionary
             print("Correct")
         else: #If the answer the user has selected is not the same as the answer for the current question from the dictionary
             print("Wrong")
+
+    Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png") #Converts the Answer1_button image into tkinter compatible format
+    btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0]  #Creates a button with the Answer1_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: select_answer(btn1)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    btn1.image = Answer1_button
+    btn1.place(relx=0.38, rely=0.75, anchor="center")
+
+    Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png") #Converts the Answer1_button image into tkinter compatible format
+    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: select_answer(btn2)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    btn2.image = Answer2_button
+    btn2.place(relx=0.625, rely=0.75, anchor="center")
+
+    Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png") #Converts the Answer1_button image into tkinter compatible format
+    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2] #Creates a button with the Answer3_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: select_answer(btn3)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    btn3.image = Answer3_button
+    btn3.place(relx=0.38, rely=0.92, anchor="center")
+
+    Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png") #Converts the Answer1_button image into tkinter compatible format
+    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
+    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: select_answer(btn4)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    btn4.image = Answer4_button
+    btn4.place(relx=0.625, rely=0.92, anchor="center")
 
     selected_button = None
     selected_answer = None
@@ -111,43 +141,18 @@ def open_questions_page(): #Creates a def function for the questions page
         nonlocal selected_button, selected_answer
 
         if selected_button:
-            selected_button.config(bg = "#000000")
+            selected_button.config(bg="white")
 
         selected_button = button
-        selected_button.config(bg = "#000000")
+        btn1.config(bg="white")
+        btn2.config(bg="white")
+        btn3.config(bg="white")
+        btn4.config(bg="white")
+        selected_button.config(bg="black")
         selected_answer = button["text"]
 
-        selected_button = lambda: select_answer(btn1)
-        selected_button = lambda: select_answer(btn2)
-        selected_button = lambda: select_answer(btn3)
-        selected_button = lambda: select_answer(btn4)
-
-    Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png") #Converts the Answer1_button image into tkinter compatible format
-    btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0]  #Creates a button with the Answer1_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn1["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
-    btn1.image = Answer1_button
-    btn1.place(relx=0.38, rely=0.75, anchor="center")
-
-    Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png") #Converts the Answer1_button image into tkinter compatible format
-    btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: check_answer(btn2["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
-    btn2.image = Answer2_button
-    btn2.place(relx=0.625, rely=0.75, anchor="center")
-
-    Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png") #Converts the Answer1_button image into tkinter compatible format
-    btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2] #Creates a button with the Answer3_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn3["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
-    btn3.image = Answer3_button
-    btn3.place(relx=0.38, rely=0.92, anchor="center")
-
-    Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png") #Converts the Answer1_button image into tkinter compatible format
-    btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: check_answer(btn4["text"])) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
-    btn4.image = Answer4_button
-    btn4.place(relx=0.625, rely=0.92, anchor="center")
-
     def hover_on(event):
-        event.widget.config(bg = "#A9A9A9")
+        event.widget.config(bg="#A9A9A9")
 
     def hover_off(event):
         event.widget.config(relief="flat")
@@ -166,6 +171,8 @@ def open_questions_page(): #Creates a def function for the questions page
 
     def exit_to_home():
         new_window.destroy()
+        name_entry.delete(0, tk.END)
+        outcome_label.config(text="Please enter your name", fg="black")
         root.deiconify()
 
     Exit_button = tk.PhotoImage(file="Image_Gallery/Exit_button.png")
@@ -191,7 +198,7 @@ def open_questions_page(): #Creates a def function for the questions page
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
     btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
     btn.image = Help_button
-    btn.place(relx=0.955, rely=0.09, anchor="center") #
+    btn.place(relx=0.955, rely=0.09, anchor="center")
 
 
     root.withdraw()
