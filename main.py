@@ -20,6 +20,7 @@ def home_page(): #Creates a def function for all elements in the home page
     outcome_label = tk.Label(root, text="Please enter your name", font=("Arial",9), bg="white") #Creates a label with a specific message, font, font size and background
     outcome_label.place(relx=0.5, rely=0.53, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
 
+    global name_checker
     def name_checker(): #Creates a def function for the name checker part
         name = name_entry.get() #Retrieves the text the user has entered
         if any(char.isdigit() for char in name): #Checks whether users name has any numbers in it
@@ -30,22 +31,23 @@ def home_page(): #Creates a def function for all elements in the home page
             outcome_label.config(text="Cannot have special characters, try again", fg="red") #Does not let the user move on to the next page and changes the text in outcome_label into the error message in red
         else: #If there is no problem with the users name
             outcome_label.config(text= "Success!", fg="green") #Changes the text in outcome_label into the success message in green
-            btn.config(command=lambda: None) #Disables the play button after it has been pressed
+            play_btn.config(command=lambda: None) #Disables the play button after it has been pressed
             root.after(1750, open_questions_page) #Lets the user move on to the next page using the open_questions_page command and makes it happen after a short period of time
 
+    global play_btn
     play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png") #Coverts the image of the play button into a tkinter compatible format
-    btn = tk.Button(root, image=play_button,  cursor="hand2", command=name_checker) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
-    btn.image = play_button #Makes the play button have the attributes of the button
-    btn.place(relx=0.5, rely=0.77, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
+    play_btn = tk.Button(root, image=play_button,  cursor="hand2", command=name_checker) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
+    play_btn.image = play_button #Makes the play button have the attributes of the button
+    play_btn.place(relx=0.5, rely=0.77, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
     def on_enter(enter): #Creates a variable for what happens when the mouse is on the button
-        btn.config(bg = "#000000") #Makes the background of the button black
+        play_btn.config(bg = "#000000") #Makes the background of the button black
 
     def on_leave(leave): #Creates a variable for what happens when the mouse is off the button
-        btn.config(bg = "#d8d3c9") #Makes the background of the button grayish orange
+        play_btn.config(bg = "#d8d3c9") #Makes the background of the button grayish orange
 
-    btn.bind("<Enter>", on_enter) #Makes it so that when the mouse is hovering over the button it changes the outline of the button
-    btn.bind("<Leave>", on_leave) #Makes it so that when the mouse is not hovering over the button it goes back to normal
+    play_btn.bind("<Enter>", on_enter) #Makes it so that when the mouse is hovering over the button it changes the outline of the button
+    play_btn.bind("<Leave>", on_leave) #Makes it so that when the mouse is not hovering over the button it goes back to normal
 
 home_page() #Runs the code in the home_page def function
 
@@ -81,7 +83,9 @@ def open_questions_page(): #Creates a def function for the questions page
 
         if selected_answer is None:
             messagebox.showinfo("Error", "Please select an answer!")
+            return
 
+        check_answer(selected_answer)
         question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
 
         current_question = Questions_answers[question_index] #Current_question is updated as the question_index increased by 1
@@ -97,6 +101,9 @@ def open_questions_page(): #Creates a def function for the questions page
 
             image_label.config(image=photo) #Makes sure python doesn't clear the image from memory
             image_label.image = photo #Makes sure python doesn't clear the image from memory
+
+            selected_button = None
+            selected_answer = None
 
             btn1.config(bg="white")
             btn2.config(bg="white")
@@ -140,22 +147,23 @@ def open_questions_page(): #Creates a def function for the questions page
     def select_answer(button):
         nonlocal selected_button, selected_answer
 
-        if selected_button:
-            selected_button.config(bg="white")
-
-        selected_button = button
         btn1.config(bg="white")
         btn2.config(bg="white")
         btn3.config(bg="white")
         btn4.config(bg="white")
+
+        selected_button = button
         selected_button.config(bg="black")
+
         selected_answer = button["text"]
 
     def hover_on(event):
-        event.widget.config(bg="#A9A9A9")
+        if event.widget != selected_button:
+            event.widget.config(bg="#A9A9A9")
 
     def hover_off(event):
-        event.widget.config(relief="flat")
+        if event.widget != selected_button:
+            event.widget.config(relief="flat")
 
     btn1.bind("<Enter>", hover_on)
     btn1.bind("<Leave>", hover_off)
@@ -172,18 +180,19 @@ def open_questions_page(): #Creates a def function for the questions page
     def exit_to_home():
         new_window.destroy()
         name_entry.delete(0, tk.END)
+        play_btn.config(command=name_checker)
         outcome_label.config(text="Please enter your name", fg="black")
         root.deiconify()
 
     Exit_button = tk.PhotoImage(file="Image_Gallery/Exit_button.png")
-    btn = tk.Button(new_window, image=Exit_button, cursor="hand2", command=exit_to_home)
-    btn.image = Exit_button
-    btn.place(relx=0.05, rely=0.09, anchor="center")
+    Exit_btn = tk.Button(new_window, image=Exit_button, cursor="hand2", command=exit_to_home)
+    Exit_btn.image = Exit_button
+    Exit_btn.place(relx=0.05, rely=0.09, anchor="center")
 
     Next_button = tk.PhotoImage(file="Image_Gallery/Next_button.png")
-    btn = tk.Button(new_window, image=Next_button, cursor="hand2", command=next_question)
-    btn.image = Next_button
-    btn.place(relx=0.80, rely=0.845, anchor="center")
+    Next_btn = tk.Button(new_window, image=Next_button, cursor="hand2", command=next_question)
+    Next_btn.image = Next_button
+    Next_btn.place(relx=0.80, rely=0.845, anchor="center")
 
     def help_popup():
         messagebox.showinfo(
@@ -199,7 +208,6 @@ def open_questions_page(): #Creates a def function for the questions page
     btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
     btn.image = Help_button
     btn.place(relx=0.955, rely=0.09, anchor="center")
-
 
     root.withdraw()
 
