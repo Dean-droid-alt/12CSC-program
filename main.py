@@ -65,7 +65,6 @@ Questions_answers = [ #Questions and answers for my quiz
 ]
 
 question_index = 0
-
 def open_questions_page(): #Creates a def function for the questions page
     new_window = tk.Toplevel(root) #Creates a secondary window
     new_window.title("Questions page") #Creates the title of the second window
@@ -163,7 +162,7 @@ def open_questions_page(): #Creates a def function for the questions page
 
     def hover_off(event):
         if event.widget != selected_button:
-            event.widget.config(relief="flat")
+            event.widget.config(bg="white")
 
     btn1.bind("<Enter>", hover_on)
     btn1.bind("<Leave>", hover_off)
@@ -199,10 +198,11 @@ def open_questions_page(): #Creates a def function for the questions page
     "Quiz help",
 "Welcome to the Geography Quiz!\n\n" 
         "- Select the one answer you believe to be correct for each question\n\n" 
-        "- Press the next button to submit your answer and move on to the next page\n\n"
+        "- Press the next button to submit your answer and move on to the next question\n\n"
         "- You cannot change your answer after it has been submited\n\n"
         "- There are 10 questions in total\n\n"
-        "- You need to get at least 7 out of 10 questions correct to pass the quiz\n")
+        "- You need to get at least 7 out of 10 questions correct to pass the quiz\n\n"
+        "- You can exit to the home page by pressing the x in the top left corner ")
 
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
     btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
