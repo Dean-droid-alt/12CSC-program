@@ -82,7 +82,6 @@ def open_questions_page(): #Creates a def function for the questions page
 
         if selected_answer is None:
             messagebox.showinfo("Error", "Please select an answer!")
-            return
 
         check_answer(selected_answer)
         question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
@@ -194,6 +193,7 @@ def open_questions_page(): #Creates a def function for the questions page
     Next_btn.place(relx=0.80, rely=0.845, anchor="center")
 
     def help_popup():
+        Help_btn.config(command=lambda:None)
         messagebox.showinfo(
     "Quiz help",
 "Welcome to the Geography Quiz!\n\n" 
@@ -203,11 +203,14 @@ def open_questions_page(): #Creates a def function for the questions page
         "- There are 10 questions in total\n\n"
         "- You need to get at least 7 out of 10 questions correct to pass the quiz\n\n"
         "- You can exit to the home page by pressing the x in the top left corner ")
+        Help_btn.config(command=lambda: help_popup)
 
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
-    btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
-    btn.image = Help_button
-    btn.place(relx=0.955, rely=0.09, anchor="center")
+    Help_btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
+    Help_btn.image = Help_button
+    Help_btn.place(relx=0.955, rely=0.09, anchor="center")
+
+    question_label =
 
     root.withdraw()
 
