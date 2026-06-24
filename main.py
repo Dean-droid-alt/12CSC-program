@@ -5,6 +5,12 @@ from tkinter import messagebox
 root = tk.Tk() #Creates the tkinter window
 root.title("Home page") #Gives the title of my first window
 
+score=0
+
+def question_number():
+    question_label = tk.Label(new_window, text=f"{question_index + 1}/10", font=("Arial", 60), bg="white")
+    question_label.place(relx=0.10, rely=0.4, anchor="center")
+
 def home_page(): #Creates a def function for all elements in the home page
     image = Image.open("Image_Gallery/Homepage.png") #Opens image from image gallery folder
     photo = ImageTk.PhotoImage(image) #Converts an image to a tkinter compatible format
@@ -36,7 +42,7 @@ def home_page(): #Creates a def function for all elements in the home page
 
     global play_btn
     play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png") #Coverts the image of the play button into a tkinter compatible format
-    play_btn = tk.Button(root, image=play_button,  cursor="hand2", command=name_checker) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
+    play_btn = tk.Button(root, image=play_button,  cursor="hand2", command=lambda: (name_checker(), question_number())) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
     play_btn.image = play_button #Makes the play button have the attributes of the button
     play_btn.place(relx=0.5, rely=0.77, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
@@ -66,6 +72,7 @@ Questions_answers = [ #Questions and answers for my quiz
 
 question_index = 0
 def open_questions_page(): #Creates a def function for the questions page
+    global new_window
     new_window = tk.Toplevel(root) #Creates a secondary window
     new_window.title("Questions page") #Creates the title of the second window
     next_image = Image.open("Image_Gallery/Q1.png") #Opens the image from image gallery folder
@@ -112,6 +119,8 @@ def open_questions_page(): #Creates a def function for the questions page
         current_question = Questions_answers[question_index]
         if selected_answer == current_question["Answer"]: #If the answer the user has selected is the same as the answer for the current question from the dictionary
             print("Correct")
+            global score
+            score+=1
         else: #If the answer the user has selected is not the same as the answer for the current question from the dictionary
             print("Wrong")
 
@@ -188,12 +197,11 @@ def open_questions_page(): #Creates a def function for the questions page
     Exit_btn.place(relx=0.05, rely=0.09, anchor="center")
 
     Next_button = tk.PhotoImage(file="Image_Gallery/Next_button.png")
-    Next_btn = tk.Button(new_window, image=Next_button, cursor="hand2", command=next_question)
+    Next_btn = tk.Button(new_window, image=Next_button, cursor="hand2", command=lambda: (next_question(), question_number()))
     Next_btn.image = Next_button
     Next_btn.place(relx=0.80, rely=0.845, anchor="center")
 
     def help_popup():
-        Help_btn.config(command=lambda:None)
         messagebox.showinfo(
     "Quiz help",
 "Welcome to the Geography Quiz!\n\n" 
@@ -203,14 +211,11 @@ def open_questions_page(): #Creates a def function for the questions page
         "- There are 10 questions in total\n\n"
         "- You need to get at least 7 out of 10 questions correct to pass the quiz\n\n"
         "- You can exit to the home page by pressing the x in the top left corner ")
-        Help_btn.config(command=lambda: help_popup)
 
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
     Help_btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
     Help_btn.image = Help_button
     Help_btn.place(relx=0.955, rely=0.09, anchor="center")
-
-    question_label =
 
     root.withdraw()
 
