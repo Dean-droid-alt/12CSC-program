@@ -8,8 +8,7 @@ root.title("Home page") #Gives the title of my first window
 score=0
 
 def question_number():
-    question_label = tk.Label(new_window, text=f"{question_index + 1}/10", font=("Arial", 60), bg="white")
-    question_label.place(relx=0.10, rely=0.4, anchor="center")
+    question_label.config(text=f"{question_index + 1}/10")
 
 def home_page(): #Creates a def function for all elements in the home page
     image = Image.open("Image_Gallery/Homepage.png") #Opens image from image gallery folder
@@ -42,7 +41,7 @@ def home_page(): #Creates a def function for all elements in the home page
 
     global play_btn
     play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png") #Coverts the image of the play button into a tkinter compatible format
-    play_btn = tk.Button(root, image=play_button,  cursor="hand2", command=lambda: (name_checker(), question_number())) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
+    play_btn = tk.Button(root, image=play_button,  cursor="hand2", command= name_checker) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
     play_btn.image = play_button #Makes the play button have the attributes of the button
     play_btn.place(relx=0.5, rely=0.77, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
@@ -81,6 +80,10 @@ def open_questions_page(): #Creates a def function for the questions page
     image_label.image = next_photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
     image_label.pack() #Makes the image for the questions page appear
 
+    global question_label
+    question_label = tk.Label(new_window, text=f"{question_index + 1}/10", font=("Arial", 60), bg="white")
+    question_label.place(relx=0.10, rely=0.4, anchor="center")
+
     current_question = Questions_answers[question_index] #A variable current_question is created which contains the line of the dictionary that corresponds to the number from question_index
 
     def next_question(): #Creates a def function for the user to move on to the next question
@@ -89,9 +92,12 @@ def open_questions_page(): #Creates a def function for the questions page
 
         if selected_answer is None:
             messagebox.showinfo("Error", "Please select an answer!")
+            return
 
         check_answer(selected_answer)
         question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
+
+        question_number()
 
         current_question = Questions_answers[question_index] #Current_question is updated as the question_index increased by 1
 
@@ -197,7 +203,7 @@ def open_questions_page(): #Creates a def function for the questions page
     Exit_btn.place(relx=0.05, rely=0.09, anchor="center")
 
     Next_button = tk.PhotoImage(file="Image_Gallery/Next_button.png")
-    Next_btn = tk.Button(new_window, image=Next_button, cursor="hand2", command=lambda: (next_question(), question_number()))
+    Next_btn = tk.Button(new_window, image=Next_button, cursor="hand2", command= next_question)
     Next_btn.image = Next_button
     Next_btn.place(relx=0.80, rely=0.845, anchor="center")
 
