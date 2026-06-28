@@ -6,6 +6,7 @@ root = tk.Tk() #Creates the tkinter window
 root.title("Home page") #Gives the title of my first window
 
 score=0
+no_answer = False
 
 def question_number():
     question_label.config(text=f"{question_index + 1}/10")
@@ -81,17 +82,25 @@ def open_questions_page(): #Creates a def function for the questions page
     image_label.pack() #Makes the image for the questions page appear
 
     global question_label
-    question_label = tk.Label(new_window, text=f"{question_index + 1}/10", font=("Arial", 60), bg="white")
-    question_label.place(relx=0.10, rely=0.4, anchor="center")
+    question_label = tk.Label(new_window, text=f"{question_index + 1}/10", font=("Arial", 60), bg="black", fg="white")
+    question_label.place(relx=0.10, rely=0.9, anchor="center")
 
     current_question = Questions_answers[question_index] #A variable current_question is created which contains the line of the dictionary that corresponds to the number from question_index
 
     def next_question(): #Creates a def function for the user to move on to the next question
         global question_index
         nonlocal selected_answer, selected_button
+        global no_answer
 
         if selected_answer is None:
-            messagebox.showinfo("Error", "Please select an answer!")
+            if no_answer:
+                return
+
+            no_answer = True
+
+            messagebox.showinfo("Error", "Please select an answer!"),
+            parent = new_window
+            no_answer = False
             return
 
         check_answer(selected_answer)
