@@ -7,6 +7,7 @@ root.title("Home page") #Gives the title of my first window
 
 score=0
 no_answer = False
+help_message = False
 
 def question_number():
     question_label.config(text=f"{question_index + 1}/10")
@@ -91,6 +92,7 @@ def open_questions_page(): #Creates a def function for the questions page
         global question_index
         nonlocal selected_answer, selected_button
         global no_answer
+        global help_message
 
         if selected_answer is None:
             if no_answer:
@@ -98,8 +100,7 @@ def open_questions_page(): #Creates a def function for the questions page
 
             no_answer = True
 
-            messagebox.showinfo("Error", "Please select an answer!"),
-            parent = new_window
+            messagebox.showinfo("Error", "Please select an answer!", parent = new_window)
             no_answer = False
             return
 
@@ -217,6 +218,12 @@ def open_questions_page(): #Creates a def function for the questions page
     Next_btn.place(relx=0.80, rely=0.845, anchor="center")
 
     def help_popup():
+        global help_message
+        if help_message:
+            return
+
+        help_message = True
+
         messagebox.showinfo(
     "Quiz help",
 "Welcome to the Geography Quiz!\n\n" 
@@ -225,7 +232,10 @@ def open_questions_page(): #Creates a def function for the questions page
         "- You cannot change your answer after it has been submited\n\n"
         "- There are 10 questions in total\n\n"
         "- You need to get at least 7 out of 10 questions correct to pass the quiz\n\n"
-        "- You can exit to the home page by pressing the x in the top left corner ")
+        "- You can exit to the home page by pressing the x in the top left corner ", parent = new_window)
+        help_message = False
+        return
+
 
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
     Help_btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
