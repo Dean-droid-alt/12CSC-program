@@ -131,6 +131,12 @@ def open_questions_page(): #Creates a def function for the questions page
             btn3.config(bg="white")
             btn4.config(bg="white")
 
+        if question_index > len(Questions_answers):
+            if score >= 7:
+                pass_window()
+            elif score <7:
+                fail_window()
+
     def check_answer(selected_answer): #Creates a def function for the answer that the user selects to be checked whether it is right or wrong the selected_answer variable is created and holds the choice the user made
         current_question = Questions_answers[question_index]
         if selected_answer == current_question["Answer"]: #If the answer the user has selected is the same as the answer for the current question from the dictionary
@@ -205,6 +211,9 @@ def open_questions_page(): #Creates a def function for the questions page
         name_entry.delete(0, tk.END)
         play_btn.config(command=name_checker)
         outcome_label.config(text="Please enter your name", fg="black")
+        global question_index, score
+        question_index = 0
+        score = 0
         root.deiconify()
 
     Exit_button = tk.PhotoImage(file="Image_Gallery/Exit_button.png")
@@ -241,6 +250,28 @@ def open_questions_page(): #Creates a def function for the questions page
     Help_btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
     Help_btn.image = Help_button
     Help_btn.place(relx=0.955, rely=0.09, anchor="center")
+
+def pass_window():
+    pass_window = tk.Toplevel(root)  # Creates a secondary window
+    pass_window.title("Pass page")  # Creates the title of the second window
+    image = Image.open("Image_Gallery/Pass_page.png")  # Opens image from image gallery folder
+    pass_photo = ImageTk.PhotoImage(image)  # Converts an image to a tkinter compatible format
+    label = tk.Label(pass_window, image=pass_photo)  # Creates a widget that displays an image instead of text
+    label.image = pass_photo  # Attaches the label to the image so that is not deleted by pythons memory cleanup
+    label.pack()  # Makes the image for the homepage appear
+
+    tk.Label(pass_window, text=f"Your score is {score}/10", font = ("Arial",18))
+
+def fail_window():
+    fail_window = tk.Toplevel(root)  # Creates a secondary window
+    fail_window.title("Fail page")  # Creates the title of the second window
+    image = Image.open("Image_Gallery/Fail_page.png")  # Opens image from image gallery folder
+    fail_photo = ImageTk.PhotoImage(image)  # Converts an image to a tkinter compatible format
+    label = tk.Label(fail_window, image=fail_photo)  # Creates a widget that displays an image instead of text
+    label.image = fail_photo  # Attaches the label to the image so that is not deleted by pythons memory cleanup
+    label.pack()  # Makes the image for the homepage appear
+
+    tk.Label(fail_window, text=f"Your score is {score}/10", font=("Arial", 18))
 
     root.withdraw()
 
