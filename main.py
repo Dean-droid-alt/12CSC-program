@@ -73,6 +73,7 @@ Questions_answers = [ #Questions and answers for my quiz
 
 question_index = 0
 def open_questions_page(): #Creates a def function for the questions page
+    root.withdraw()
     global new_window
     new_window = tk.Toplevel(root) #Creates a secondary window
     new_window.title("Questions page") #Creates the title of the second window
@@ -107,6 +108,15 @@ def open_questions_page(): #Creates a def function for the questions page
         check_answer(selected_answer)
         question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
 
+        if question_index >= len(Questions_answers):
+            new_window.destroy()
+            if score >= 7:
+                pass_window()
+                return
+            elif score <7:
+                fail_window()
+                return
+
         question_number()
 
         current_question = Questions_answers[question_index] #Current_question is updated as the question_index increased by 1
@@ -130,12 +140,6 @@ def open_questions_page(): #Creates a def function for the questions page
             btn2.config(bg="white")
             btn3.config(bg="white")
             btn4.config(bg="white")
-
-        if question_index > len(Questions_answers):
-            if score >= 7:
-                pass_window()
-            elif score <7:
-                fail_window()
 
     def check_answer(selected_answer): #Creates a def function for the answer that the user selects to be checked whether it is right or wrong the selected_answer variable is created and holds the choice the user made
         current_question = Questions_answers[question_index]
@@ -260,7 +264,8 @@ def pass_window():
     label.image = pass_photo  # Attaches the label to the image so that is not deleted by pythons memory cleanup
     label.pack()  # Makes the image for the homepage appear
 
-    tk.Label(pass_window, text=f"Your score is {score}/10", font = ("Arial",18))
+    pass_message = tk.Label(pass_window, text=f"Your score is {score}/10", font = ("Arial",40), fg="green", bg="black")
+    pass_message.place(relx=0.5, rely=0.4, anchor="center")
 
 def fail_window():
     fail_window = tk.Toplevel(root)  # Creates a secondary window
@@ -271,7 +276,8 @@ def fail_window():
     label.image = fail_photo  # Attaches the label to the image so that is not deleted by pythons memory cleanup
     label.pack()  # Makes the image for the homepage appear
 
-    tk.Label(fail_window, text=f"Your score is {score}/10", font=("Arial", 18))
+    fail_message = tk.Label(fail_window, text=f"Your score is {score}/10", font=("Arial", 40), fg="red", bg="black")
+    fail_message.place(relx=0.5, rely=0.4, anchor="center")
 
     root.withdraw()
 
