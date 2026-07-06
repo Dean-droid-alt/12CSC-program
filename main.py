@@ -8,6 +8,8 @@ root.title("Home page") #Gives the title of my first window
 score=0
 no_answer = False
 help_message = False
+root.geometry("1145x645") #resize window
+root.resizable(False, False)
 
 def question_number():
     question_label.config(text=f"{question_index + 1}/10")
@@ -77,6 +79,8 @@ def open_questions_page(): #Creates a def function for the questions page
     global new_window
     new_window = tk.Toplevel(root) #Creates a secondary window
     new_window.title("Questions page") #Creates the title of the second window
+    new_window.geometry("1145x645")  # resize window
+    new_window.resizable(False, False)
     next_image = Image.open("Image_Gallery/Q1.png") #Opens the image from image gallery folder
     next_photo = ImageTk.PhotoImage(next_image) #Converts an image to a tkinter compatible format
     image_label = tk.Label(new_window, image=next_photo) #Creates a widget that displays an image instead of text
@@ -88,6 +92,17 @@ def open_questions_page(): #Creates a def function for the questions page
     question_label.place(relx=0.10, rely=0.9, anchor="center")
 
     current_question = Questions_answers[question_index] #A variable current_question is created which contains the line of the dictionary that corresponds to the number from question_index
+
+    def check_answer(selected_answer): #Creates a def function for the answer that the user selects to be checked whether it is right or wrong the selected_answer variable is created and holds the choice the user made
+        current_question = Questions_answers[question_index]
+        if selected_answer == current_question["Answer"]: #If the answer the user has selected is the same as the answer for the current question from the dictionary
+            print("Correct")
+            result_label.config(text="Your answer is correct!", fg="green", bg="white")
+            global score
+            score+=1
+        else: #If the answer the user has selected is not the same as the answer for the current question from the dictionary
+            print("Wrong")
+            result_label.config(text="Your answer is wrong!", fg="red", bg="white")
 
     def next_question(): #Creates a def function for the user to move on to the next question
         global question_index
@@ -141,36 +156,27 @@ def open_questions_page(): #Creates a def function for the questions page
             btn3.config(bg="white")
             btn4.config(bg="white")
 
-    def check_answer(selected_answer): #Creates a def function for the answer that the user selects to be checked whether it is right or wrong the selected_answer variable is created and holds the choice the user made
-        current_question = Questions_answers[question_index]
-        if selected_answer == current_question["Answer"]: #If the answer the user has selected is the same as the answer for the current question from the dictionary
-            print("Correct")
-            global score
-            score+=1
-        else: #If the answer the user has selected is not the same as the answer for the current question from the dictionary
-            print("Wrong")
-
     Answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png") #Converts the Answer1_button image into tkinter compatible format
     btn1 = tk.Button(new_window, image=Answer1_button, cursor="hand2", text= current_question["Options"][0]  #Creates a button with the Answer1_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: select_answer(btn1)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    , compound="center", font=("Arial", 15, "bold"), relief="flat", fg="white", command=lambda: select_answer(btn1)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn1.image = Answer1_button
     btn1.place(relx=0.38, rely=0.75, anchor="center")
 
     Answer2_button = tk.PhotoImage(file="Image_Gallery/Answer2.png") #Converts the Answer1_button image into tkinter compatible format
     btn2 = tk.Button(new_window, image=Answer2_button, cursor="hand2", text= current_question["Options"][1] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat", fg="white", command=lambda: select_answer(btn2)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    , compound="center", font=("Arial", 15, "bold"), relief="flat", fg="white", command=lambda: select_answer(btn2)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn2.image = Answer2_button
     btn2.place(relx=0.625, rely=0.75, anchor="center")
 
     Answer3_button = tk.PhotoImage(file="Image_Gallery/Answer3.png") #Converts the Answer1_button image into tkinter compatible format
     btn3 = tk.Button(new_window, image=Answer3_button, cursor="hand2", text= current_question["Options"][2] #Creates a button with the Answer3_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: select_answer(btn3)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    , compound="center", font=("Arial", 15, "bold"), relief="flat",  fg="white", command=lambda: select_answer(btn3)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn3.image = Answer3_button
     btn3.place(relx=0.38, rely=0.92, anchor="center")
 
     Answer4_button = tk.PhotoImage(file="Image_Gallery/Answer4.png") #Converts the Answer1_button image into tkinter compatible format
     btn4 = tk.Button(new_window, image=Answer4_button, cursor="hand2", text= current_question["Options"][3] #Creates a button with the Answer2_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
-    , compound="center", font=("Arial", 14, "bold"), relief="flat",  fg="white", command=lambda: select_answer(btn4)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
+    , compound="center", font=("Arial", 15, "bold"), relief="flat",  fg="white", command=lambda: select_answer(btn4)) #The button text is set to display directly on top of the button, the font is changed, the button becomes flat, the text becomes white, and the answer is checked using the check_answer def function
     btn4.image = Answer4_button
     btn4.place(relx=0.625, rely=0.92, anchor="center")
 
@@ -210,7 +216,7 @@ def open_questions_page(): #Creates a def function for the questions page
     btn4.bind("<Enter>", hover_on)
     btn4.bind("<Leave>", hover_off)
 
-    def exit_to_home():
+    def questions_page_to_home():
         new_window.destroy()
         name_entry.delete(0, tk.END)
         play_btn.config(command=name_checker)
@@ -221,7 +227,7 @@ def open_questions_page(): #Creates a def function for the questions page
         root.deiconify()
 
     Exit_button = tk.PhotoImage(file="Image_Gallery/Exit_button.png")
-    Exit_btn = tk.Button(new_window, image=Exit_button, cursor="hand2", command=exit_to_home)
+    Exit_btn = tk.Button(new_window, image=Exit_button, cursor="hand2", command=questions_page_to_home)
     Exit_btn.image = Exit_button
     Exit_btn.place(relx=0.05, rely=0.09, anchor="center")
 
@@ -229,6 +235,9 @@ def open_questions_page(): #Creates a def function for the questions page
     Next_btn = tk.Button(new_window, image=Next_button, cursor="hand2", command= next_question)
     Next_btn.image = Next_button
     Next_btn.place(relx=0.80, rely=0.845, anchor="center")
+
+    result_label = tk.Label(new_window, text="", font=("Arial", 12))
+    result_label.place(relx=0.5, rely=0.53, anchor="center")
 
     def help_popup():
         global help_message
@@ -249,7 +258,6 @@ def open_questions_page(): #Creates a def function for the questions page
         help_message = False
         return
 
-
     Help_button = tk.PhotoImage(file="Image_Gallery/Help_button.png")
     Help_btn = tk.Button(new_window, image=Help_button, cursor="hand2", command= help_popup)
     Help_btn.image = Help_button
@@ -258,26 +266,88 @@ def open_questions_page(): #Creates a def function for the questions page
 def pass_window():
     pass_window = tk.Toplevel(root)  # Creates a secondary window
     pass_window.title("Pass page")  # Creates the title of the second window
+    pass_window.geometry("1145x645")  # resize window
+    pass_window.resizable(False, False)
     image = Image.open("Image_Gallery/Pass_page.png")  # Opens image from image gallery folder
     pass_photo = ImageTk.PhotoImage(image)  # Converts an image to a tkinter compatible format
     label = tk.Label(pass_window, image=pass_photo)  # Creates a widget that displays an image instead of text
     label.image = pass_photo  # Attaches the label to the image so that is not deleted by pythons memory cleanup
     label.pack()  # Makes the image for the homepage appear
 
-    pass_message = tk.Label(pass_window, text=f"Your score is {score}/10", font = ("Arial",40), fg="green", bg="black")
-    pass_message.place(relx=0.5, rely=0.4, anchor="center")
+    pass_message = tk.Label(pass_window, text=f"Your score is {score}/10", font = ("Arial",50), fg="green", bg="black")
+    pass_message.place(relx=0.5, rely=0.412, anchor="center")
+
+    def play_again():
+        play_again_button = tk.PhotoImage(file="Image_Gallery/Play_again_button.png")
+        play_again_btn = tk.Button(pass_window, image=play_again_button, cursor="hand2", command=pass_window_to_home)
+        play_again_btn.image = play_again_button
+        play_again_btn.place(relx=0.59, rely=0.75, anchor="center")
+
+    def pass_window_to_home():
+        pass_window.destroy()
+        name_entry.delete(0, tk.END)
+        play_btn.config(command=name_checker)
+        outcome_label.config(text="Please enter your name", fg="black")
+        global question_index, score
+        question_index = 0
+        score = 0
+        root.deiconify()
+
+    play_again()
+
+    def no_play_again():
+        no_play_again_button = tk.PhotoImage(file="Image_Gallery/No_play_again_button.png")
+        no_play_again_btn = tk.Button(pass_window, image=no_play_again_button, cursor="hand2", command=pass_window_exit)
+        no_play_again_btn.image = no_play_again_button
+        no_play_again_btn.place(relx=0.39, rely=0.75, anchor="center")
+
+    def pass_window_exit():
+        root.destroy()
+
+    no_play_again()
 
 def fail_window():
     fail_window = tk.Toplevel(root)  # Creates a secondary window
     fail_window.title("Fail page")  # Creates the title of the second window
+    fail_window.geometry("1145x645")  # resize window
+    fail_window.resizable(False, False)
     image = Image.open("Image_Gallery/Fail_page.png")  # Opens image from image gallery folder
     fail_photo = ImageTk.PhotoImage(image)  # Converts an image to a tkinter compatible format
     label = tk.Label(fail_window, image=fail_photo)  # Creates a widget that displays an image instead of text
     label.image = fail_photo  # Attaches the label to the image so that is not deleted by pythons memory cleanup
     label.pack()  # Makes the image for the homepage appear
 
-    fail_message = tk.Label(fail_window, text=f"Your score is {score}/10", font=("Arial", 40), fg="red", bg="black")
-    fail_message.place(relx=0.5, rely=0.4, anchor="center")
+    fail_message = tk.Label(fail_window, text=f"Your score is {score}/10", font=("Arial", 50), fg="red", bg="black")
+    fail_message.place(relx=0.5, rely=0.412, anchor="center")
+
+    def play_again():
+        play_again_button = tk.PhotoImage(file="Image_Gallery/Play_again_button.png")
+        play_again_btn = tk.Button(fail_window, image=play_again_button, cursor="hand2", command=fail_window_to_home)
+        play_again_btn.image = play_again_button
+        play_again_btn.place(relx=0.59, rely=0.75, anchor="center")
+
+    def fail_window_to_home():
+        fail_window.destroy()
+        name_entry.delete(0, tk.END)
+        play_btn.config(command=name_checker)
+        outcome_label.config(text="Please enter your name", fg="black")
+        global question_index, score
+        question_index = 0
+        score = 0
+        root.deiconify()
+
+    play_again()
+
+    def no_play_again():
+        no_play_again_button = tk.PhotoImage(file="Image_Gallery/No_play_again_button.png")
+        no_play_again_btn = tk.Button(fail_window, image=no_play_again_button, cursor="hand2", command=fail_window_exit)
+        no_play_again_btn.image = no_play_again_button
+        no_play_again_btn.place(relx=0.39, rely=0.75, anchor="center")
+
+    def fail_window_exit():
+        root.destroy()
+
+    no_play_again()
 
     root.withdraw()
 
