@@ -87,13 +87,13 @@ def open_questions_page(): #Creates a def function for the questions page
     question_label = tk.Label(new_window, text=f"{question_index + 1}/10", font=("Arial", 60), bg="black", fg="white")
     question_label.place(relx=0.10, rely=0.9, anchor="center") #Aligns the label to the centre of the screen and moves it to a suitable position
 
+    def question_number(): #Creates a def function for the question number
+        question_label.config(text=f"{question_index + 1}/10") #Updates the question number each time the def function is called
+
     # Creates a label with a specific font and background, and makes it so that it appears in the new window. It will display whether the answer the user submitted is correct or not
     result_label = tk.Label(new_window, font=("Arial", 14), bg="white")
     result_label.place(relx=0.8, rely=0.63, anchor="center") #Aligns the label to the centre of the screen and moves it to a suitable position
     result_label.place_forget() #Hides the label so that it is not seen
-
-    def question_number(): #Creates a def function for the question number
-        question_label.config(text=f"{question_index + 1}/10") #Updates the question number each time the def function is called
 
     current_question = Questions_answers[question_index] #A variable current_question is created which contains the line of the dictionary that corresponds to the number from question_index
 
