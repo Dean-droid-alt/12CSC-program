@@ -46,14 +46,14 @@ def home_page(): #Creates a def function for all elements in the home page
     play_btn.image = play_button #Makes the play button have the attributes of the button
     play_btn.place(relx=0.5, rely=0.77, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
-    def on_enter(enter): #Creates a variable for what happens when the mouse is on the button
-        play_btn.config(bg = "#000000") #Makes the background of the button black
+    def on_enter(enter): #Creates a variable for what happens when the mouse is on the play_btn
+        play_btn.config(bg = "#000000") #Makes the background of the play_btn black
 
-    def on_leave(leave): #Creates a variable for what happens when the mouse is off the button
-        play_btn.config(bg = "#d8d3c9") #Makes the background of the button grayish orange
+    def on_leave(leave): #Creates a variable for what happens when the mouse is off the play_btn
+        play_btn.config(bg = "#d8d3c9") #Makes the background of the play_btn grayish orange
 
-    play_btn.bind("<Enter>", on_enter) #Makes it so that when the mouse is hovering over the button it changes the outline of the button
-    play_btn.bind("<Leave>", on_leave) #Makes it so that when the mouse is not hovering over the button it goes back to normal
+    play_btn.bind("<Enter>", on_enter) #Makes it so that when the mouse is hovering over the play_btn it changes the outline of the play_btn
+    play_btn.bind("<Leave>", on_leave) #Makes it so that when the mouse is not hovering over the play_btn it goes back to normal
 
 home_page() #Runs the code in the home_page def function
 
@@ -294,6 +294,15 @@ def pass_window(): #Creates the def function pass_window
         play_again_btn.image = play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         play_again_btn.place(relx=0.59, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
+        def hover_on(enter):  # Creates a variable for what happens when the mouse is on the play_again_btn
+            play_again_btn.config(bg="#000000")  # Makes the background of the play_again_btn black
+
+        def hover_off(leave):  # Creates a variable for what happens when the mouse is off the play_again_btn
+            play_again_btn.config(bg="#fffff")  # Makes the background of the play_again_btn white
+
+        play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the play_again_btn it changes the outline of the play_again_btn
+        play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the play_again_btn it goes back to normal
+
     def pass_window_to_home(): #Creates a def function for the command for the play again button
         global question_index, score  # Makes the question_index and score variables global so it can be used anywhere in the code
         pass_window.destroy() #The pass window is destroyed
@@ -312,6 +321,15 @@ def pass_window(): #Creates the def function pass_window
         no_play_again_btn = tk.Button(pass_window, image=no_play_again_button, cursor="hand2", command=pass_window_exit)
         no_play_again_btn.image = no_play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         no_play_again_btn.place(relx=0.39, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
+
+        def hover_on(enter):  # Creates a variable for what happens when the mouse is on the no_play_again_btn
+            no_play_again_btn.config(bg="#000000")  # Makes the background of the no_play_again_btn black
+
+        def hover_off(leave):  # Creates a variable for what happens when the mouse is off the no_play_again_btn
+            no_play_again_btn.config(bg="#fffff")  # Makes the background of the no_play_again_btn white
+
+        no_play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the no_play_again_btn it changes the outline of the no_play_again_btn
+        no_play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the no_play_again_btn it goes back to normal
 
     def pass_window_exit(): #Creates a def function for the command for the no play again button
         root.destroy() #Destroys all the windows which ends the quiz
@@ -340,6 +358,15 @@ def fail_window(): #Creates the def function fail_window
         play_again_btn.image = play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         play_again_btn.place(relx=0.59, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
+        def hover_on(enter):  # Creates a variable for what happens when the mouse is on the play_again_btn
+            play_again_btn.config(bg="#000000")  # Makes the background of the play_again_btn black
+
+        def hover_off(leave):  # Creates a variable for what happens when the mouse is off the play_again_btn
+            play_again_btn.config(bg="#fffff")  # Makes the background of the play_again_btn white
+
+        play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the play_again_btn it changes the outline of the play_again_btn
+        play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the play_again_btn it goes back to normal
+
     def fail_window_to_home(): #Creates a def function for the command for the play again button
         global question_index, score # Makes the question_index and score variables global so it can be used anywhere in the code
         fail_window.destroy() #The fail window is destroyed
@@ -358,6 +385,15 @@ def fail_window(): #Creates the def function fail_window
         no_play_again_btn = tk.Button(fail_window, image=no_play_again_button, cursor="hand2", command=fail_window_exit)
         no_play_again_btn.image = no_play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         no_play_again_btn.place(relx=0.39, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
+
+        def hover_on(enter):  # Creates a variable for what happens when the mouse is on the no_play_again_btn
+            no_play_again_btn.config(bg="#000000")  # Makes the background of the no_play_again_btn black
+
+        def hover_off(leave):  # Creates a variable for what happens when the mouse is off the no_play_again_btn
+            no_play_again_btn.config(bg="#fffff")  # Makes the background of the no_play_again_btn white
+
+        no_play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the no_play_again_btn it changes the outline of the no_play_again_btn
+        no_play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the no_play_again_btn it goes back to normal
 
     def fail_window_exit(): #Creates a def function for the command for the no play again button
         root.destroy() #Destroys all the windows which ends the quiz
