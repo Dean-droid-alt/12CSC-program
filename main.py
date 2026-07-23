@@ -290,7 +290,7 @@ def pass_window(): #Creates the def function pass_window
     def play_again(): #Creates the def function for the user to play again
         play_again_button = tk.PhotoImage(file="Image_Gallery/Play_again_button.png") #Converts the play_again_button image into tkinter compatible format
         #Creates a button with the play_again_button image that turns the mouse into the pointer when it is hovered over and calls the command pass_window_to_home
-        play_again_btn = tk.Button(pass_window, image=play_again_button, cursor="hand2", command=pass_window_to_home)
+        play_again_btn = tk.Button(pass_window, image=play_again_button, bg= "white", cursor="hand2", command=pass_window_to_home)
         play_again_btn.image = play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         play_again_btn.place(relx=0.59, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
@@ -298,7 +298,7 @@ def pass_window(): #Creates the def function pass_window
             play_again_btn.config(bg="#000000")  # Makes the background of the play_again_btn black
 
         def hover_off(leave):  # Creates a variable for what happens when the mouse is off the play_again_btn
-            play_again_btn.config(bg="#fffff")  # Makes the background of the play_again_btn white
+            play_again_btn.config(bg="#ffffff")  # Makes the background of the play_again_btn white
 
         play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the play_again_btn it changes the outline of the play_again_btn
         play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the play_again_btn it goes back to normal
@@ -318,7 +318,7 @@ def pass_window(): #Creates the def function pass_window
     def no_play_again(): #Creates the def function for the user to not play again
         no_play_again_button = tk.PhotoImage(file="Image_Gallery/No_play_again_button.png") #Converts the no_play_again_button image into tkinter compatible format
         #Creates a button with the no_play_again_button image that turns the mouse into the pointer when it is hovered over and calls the command pass_window_exit
-        no_play_again_btn = tk.Button(pass_window, image=no_play_again_button, cursor="hand2", command=pass_window_exit)
+        no_play_again_btn = tk.Button(pass_window, image=no_play_again_button, bg= "white", cursor="hand2", command=pass_window_exit)
         no_play_again_btn.image = no_play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         no_play_again_btn.place(relx=0.39, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
@@ -326,7 +326,7 @@ def pass_window(): #Creates the def function pass_window
             no_play_again_btn.config(bg="#000000")  # Makes the background of the no_play_again_btn black
 
         def hover_off(leave):  # Creates a variable for what happens when the mouse is off the no_play_again_btn
-            no_play_again_btn.config(bg="#fffff")  # Makes the background of the no_play_again_btn white
+            no_play_again_btn.config(bg="#ffffff")  # Makes the background of the no_play_again_btn white
 
         no_play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the no_play_again_btn it changes the outline of the no_play_again_btn
         no_play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the no_play_again_btn it goes back to normal
@@ -354,7 +354,7 @@ def fail_window(): #Creates the def function fail_window
     def play_again(): #Creates the def function for the user to play again
         play_again_button = tk.PhotoImage(file="Image_Gallery/Play_again_button.png")  #Converts the play_again_button image into tkinter compatible format
         # Creates a button with the play_again_button image that turns the mouse into the pointer when it is hovered over and calls the command fail_window_to_home
-        play_again_btn = tk.Button(fail_window, image=play_again_button, cursor="hand2", command=fail_window_to_home)
+        play_again_btn = tk.Button(fail_window, image=play_again_button, bg= "white", cursor="hand2", command=fail_window_to_home)
         play_again_btn.image = play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         play_again_btn.place(relx=0.59, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
@@ -362,7 +362,7 @@ def fail_window(): #Creates the def function fail_window
             play_again_btn.config(bg="#000000")  # Makes the background of the play_again_btn black
 
         def hover_off(leave):  # Creates a variable for what happens when the mouse is off the play_again_btn
-            play_again_btn.config(bg="#fffff")  # Makes the background of the play_again_btn white
+            play_again_btn.config(bg="#ffffff")  # Makes the background of the play_again_btn white
 
         play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the play_again_btn it changes the outline of the play_again_btn
         play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the play_again_btn it goes back to normal
@@ -382,7 +382,7 @@ def fail_window(): #Creates the def function fail_window
     def no_play_again(): #Creates the def function for the user to not play again
         no_play_again_button = tk.PhotoImage(file="Image_Gallery/No_play_again_button.png") #Converts the no_play_again_button image into tkinter compatible format
         #Creates a button with the no_play_again_button image that turns the mouse into the pointer when it is hovered over and calls the command fail_window_exit
-        no_play_again_btn = tk.Button(fail_window, image=no_play_again_button, cursor="hand2", command=fail_window_exit)
+        no_play_again_btn = tk.Button(fail_window, image=no_play_again_button, bg= "white", cursor="hand2", command=fail_window_exit)
         no_play_again_btn.image = no_play_again_button #Attaches the button to the image so that is not deleted by pythons memory cleanup
         no_play_again_btn.place(relx=0.39, rely=0.75, anchor="center") #Aligns the button to the centre of the screen and moves it to a suitable position
 
@@ -390,7 +390,7 @@ def fail_window(): #Creates the def function fail_window
             no_play_again_btn.config(bg="#000000")  # Makes the background of the no_play_again_btn black
 
         def hover_off(leave):  # Creates a variable for what happens when the mouse is off the no_play_again_btn
-            no_play_again_btn.config(bg="#fffff")  # Makes the background of the no_play_again_btn white
+            no_play_again_btn.config(bg="#ffffff")  # Makes the background of the no_play_again_btn white
 
         no_play_again_btn.bind("<Enter>",hover_on)  # Makes it so that when the mouse is hovering over the no_play_again_btn it changes the outline of the no_play_again_btn
         no_play_again_btn.bind("<Leave>",hover_off)  # Makes it so that when the mouse is not hovering over the no_play_again_btn it goes back to normal
