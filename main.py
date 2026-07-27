@@ -19,7 +19,7 @@ def home_page(): #Creates a def function for all elements in the home page
     label.image = photo #Attaches the label to the image so that is not deleted by pythons memory cleanup
     label.pack()  #Makes the image for the homepage appear
 
-    global name_entry, outcome_label, name_checker #Makes the name_entry and outcome_label variables global so they can be used anywhere in the code
+    global name_entry, outcome_label, name_checker #Makes the name_entry, outcome_label, and name_checker variables global so they can be used anywhere in the code
     name_entry = tk.Entry(root, width=25, bd=2.5, font= ("Arial", 20)) #Creates the name entry box with specific width, length and font
     name_entry.bind('<Return>', lambda event: name_checker()) #Makes it so that you can enter your name with the enter button
     name_entry.place(relx=0.5, rely=0.48, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
@@ -40,7 +40,7 @@ def home_page(): #Creates a def function for all elements in the home page
             play_btn.config(command=lambda: None) #Disables the play button after it has been pressed
             root.after(1750, open_questions_page) #Lets the user move on to the next page using the open_questions_page command and makes it happen after a short period of time
 
-    global play_btn #Makes the play_btn variables global so it can be used anywhere in the code
+    global play_btn #Makes the play_btn variable global so it can be used anywhere in the code
     play_button = tk.PhotoImage(file="Image_Gallery/Play_button.png") #Coverts the image of the play button into a tkinter compatible format
     play_btn = tk.Button(root, image=play_button,  cursor="hand2", command= name_checker) #Creates a button with the play button image that turns the mouse into the pointer when it is hovered over and goes through the name_checker def function when clicked
     play_btn.image = play_button #Makes the play button have the attributes of the button
@@ -110,7 +110,7 @@ def open_questions_page(): #Creates a def function for the questions page
         global question_index, no_answer, help_message #Makes the question_index, no_answer, and help_message variables global so it can be used anywhere in the code
 
         def load_question(): #Creates a def function for the question to be loaded
-            global question_index # Makes the question_index, no_answer, and help_message variables global so it can be used anywhere in the code
+            global question_index # Makes the question_index variable global so it can be used anywhere in the code
             nonlocal selected_answer, selected_button #Makes the selected_answer and selected_button variables nonlocal so it can be used anywhere within the open_questions_page def function
             question_index +=1 #Adds 1 to the question_index so that it corresponds to the next question
 
@@ -148,8 +148,6 @@ def open_questions_page(): #Creates a def function for the questions page
                 btn3.config(bg="white") #Changes the btn3 back to how it was without a hover effect for each question
                 btn4.config(bg="white") #Changes the btn4 back to how it was without a hover effect for each question
 
-        new_window.after(700, load_question) #Makes it so that it takes 700 milliseconds for the next question to be loaded, this means the user has time to see the result label
-
         if selected_answer is None: #If the user has not selected any answer
             if no_answer: #If no_answer message is already on screen
                 return #Returns back
@@ -162,6 +160,8 @@ def open_questions_page(): #Creates a def function for the questions page
 
         check_answer(selected_answer) #Runs the def function def check_answer(selected_answer)
         result_label.place(relx=0.8, rely=0.63, anchor="center") #Aligns the label to the centre of the screen and moves it to a suitable position
+
+        new_window.after(700,load_question)  # Makes it so that it takes 700 milliseconds for the next question to be loaded, this means the user has time to see the result label
 
     answer1_button = tk.PhotoImage(file="Image_Gallery/Answer1.png") #Converts the Answer1_button image into tkinter compatible format
     btn1 = tk.Button(new_window, image=answer1_button, cursor="hand2", text= current_question["Options"][0]  #Creates a button with the Answer1_button image that turns the mouse into the pointer when it is hovered over and displays the text for the current question
