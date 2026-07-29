@@ -24,8 +24,8 @@ def home_page(): #Creates a def function for all elements in the home page
     name_entry.bind('<Return>', lambda event: name_checker()) #Makes it so that you can enter your name with the enter button
     name_entry.place(relx=0.5, rely=0.48, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
 
-    outcome_label = tk.Label(root, text="Please enter your name", font=("Arial",9), bg="white") #Creates a label with a specific message, font, font size and background
-    outcome_label.place(relx=0.5, rely=0.53, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
+    outcome_label = tk.Label(root, text="Please enter your name", font=("Arial",10), bg="white") #Creates a label with a specific message, font, font size and background
+    outcome_label.place(relx=0.5, rely=0.533, anchor="center") #Aligns the name entry box to the centre of the screen and moves it to a suitable position
 
     def name_checker(): #Creates a def function for the name checker part
         name = name_entry.get() #Retrieves the text the user has entered
